@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UserJobData</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <h1>User Directory</h1>
+    <ul>
+      {{#users}}
+      <li>
+        <img src={{avatar}} alt="suppose to be an avatar.">
+        <h2>{{name}}</h2>
+        {{#job}}
+          <p>{{job}}, {{company}}</p>
+        {{/job}}
+        {{^job}}
+          <p class="forHire">Available for hire</p>
+        {{/job}}
+      </li>
+      {{/users}}
+    </ul>
+  </body>
+</html>
