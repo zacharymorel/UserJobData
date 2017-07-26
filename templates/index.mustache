@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>UserJobData</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <h1>User Directory</h1>
@@ -11,7 +11,7 @@
       {{#users}}
       <li>
         <img src={{avatar}} alt="suppose to be an avatar.">
-        <a href="localhost:3000/{{id}}/">{{name}}</a>
+        <a href="/{{id}}/">{{name}}</a>
         {{#job}}
           <p>{{job}}, {{company}}</p>
         {{/job}}
@@ -21,6 +21,5 @@
       </li>
       {{/users}}
     </ul>
-    <script src="main.js"></script>
   </body>
 </html>
