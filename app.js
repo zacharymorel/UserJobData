@@ -14,18 +14,10 @@ app.get('/', (request, response) => {
   response.render('index', userData)
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
+app.get('/:id/', (request, response) => {
+  let userId = +(request.params.id)-1
+  response.render('userpage', userInfo[userId])
+})
 
 
 
