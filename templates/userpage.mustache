@@ -8,19 +8,18 @@
     <div class="personalInfo">
       <img src={{avatar}} alt="Suppose to be a avatar">
       <h1>{{name}}</h1>
-      <span class="currentLinving">{{address.city}}, {{address.country}}</span>
-      <span class="career">{{job}}, {{company}}</span>
+
+      {{#address.city}}<span class="currentLinving">{{address.city}}, {{address.country}}</span>{{/address.city}}
+        {{^address.city}}<span>{{address.country}}</span>{{/address.city}}
+      {{#job}}<span class="career">{{job}}, {{company}}</span>{{/job}}
+        {{^job}}<p class="forHire">Available for hire</p>{{/job}}
       <span class="communication">{{email}}, {{phone}}</span>
+      {{#university}} <p class="userSchool">Education: {{university}}</p>{{/university}}
+        {{^university}}<p class="userSchool"></p>{{/university}}
+      <span class="skillspan">Skills:</span>
+      <ul class="userSkills">
+        {{#skills}}<li class="skillsList">{{.}}</li>{{/skills}}
+      </ul>
     </div>
-    <tbody>
-      <tr>
-        <td>Education</td>
-        <td>{{university}}</td>
-      </tr>
-      <tr>
-        <td>Skills</td>
-        <td>{{skills}}</td>
-      </tr>
-    </tbody>
   </body>
 </html>
