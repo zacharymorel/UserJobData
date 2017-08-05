@@ -1,8 +1,14 @@
 const express = require('express')
 const mustacheExpress = require('mustache-express')
-const userData = require('./data.js')
+const bodyParser = require('body-parser')
+const pgPromise = require('pg-promise')()
 const app = express()
-const userInfo = userData.users
+
+const database = pgPromise({ database: 'robotDB'})
+// console.log(database);
+
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 app.use(express.static('public'))
 app.engine('mustache', mustacheExpress())
@@ -11,7 +17,7 @@ app.set('view engine', 'mustache')
 
 
 app.get('/', (request, response) => {
-  response.render('index', userData)
+  response.render('index')
 })
 
 app.get('/:id/', (request, response) => {
