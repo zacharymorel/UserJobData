@@ -10,14 +10,14 @@
     <ul>
       {{#users}}
       <li>
-        <img src={{avatar}} alt="suppose to be an avatar.">
-        <a href="/{{id}}/">{{name}}</a>
-        {{#job}}
-          <p>{{job}}, {{company}}</p>
-        {{/job}}
-        {{^job}}
+        <img src={{ImageUrl}} alt="suppose to be an avatar.">
+        <a href="/{{id}}/">{{UserName}}</a>
+        {{#Job}}
+          <p>{{Job}}, {{Company}}</p>
+        {{/Job}}
+        {{^Job}}
           <p class="forHire">Available for hire</p>
-        {{/job}}
+        {{/Job}}
       </li>
       {{/users}}
     </ul>
