@@ -20,13 +20,17 @@ app.set('view engine', 'mustache')
 //     console.log(`This is user id ${row.id} and this is username ${row.UserName}.`)
 //   })
 // })
+// I used this to show my database data in my console.log
 
 app.get('/', (request, response) => {
+  database.any('SELECT * FROM "robottable"').then(rows => {
+
     const templateData = {
-      users: rows.filter(row => )
-      // trying still to get the data from DataBase to render on the page.
+      id: rows.filter(row => row.id)
+      // WAT?
     }
-  response.render('index', templateData)
+    response.render('index', templateData)
+  })
 })
 
 app.get('/:id/', (request, response) => {

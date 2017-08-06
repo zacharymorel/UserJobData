@@ -8,7 +8,7 @@
   <body>
     <h1>User Directory</h1>
     <ul>
-      {{#users}}
+      {{#id}}
       <li>
         <img src={{ImageUrl}} alt="suppose to be an avatar.">
         <a href="/{{id}}/">{{UserName}}</a>
@@ -19,7 +19,7 @@
           <p class="forHire">Available for hire</p>
         {{/Job}}
       </li>
-      {{/users}}
+      {{/id}}
     </ul>
   </body>
 </html>
