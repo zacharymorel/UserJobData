@@ -6,20 +6,14 @@
   </head>
   <body>
     <div class="personalInfo">
-      <img src={{avatar}} alt="Suppose to be a avatar">
-      <h1>{{name}}</h1>
-
-      {{#address.city}}<span class="currentLinving">{{address.city}}, {{address.country}}</span>{{/address.city}}
-        {{^address.city}}<span>{{address.country}}</span>{{/address.city}}
-      {{#job}}<span class="career">{{job}}, {{company}}</span>{{/job}}
-        {{^job}}<p class="forHire">Available for hire</p>{{/job}}
-      <span class="communication">{{email}}, {{phone}}</span>
-      {{#university}} <p class="userSchool">Education: {{university}}</p>{{/university}}
-        {{^university}}<p class="userSchool"></p>{{/university}}
-      <span class="skillspan">Skills:</span>
-      <ul class="userSkills">
-        {{#skills}}<li class="skillsList">{{.}}</li>{{/skills}}
-      </ul>
+      <img src={{ImageUrl}} alt="Suppose to be a avatar">
+      <h1>{{UserName}}</h1>
+        {{#Address}}<p class="currentLinving">{{Address}} </p>{{/Address}}
+        {{#Job}}<p class="career">{{Job}}, {{Company}}</p>{{/Job}}
+          {{^Job}}<p class="forHire">Available for hire</p>{{/Job}}
+        <p class="communication">{{Email}}, {{Phone}}</p>
+        {{#University}} <p class="userSchool">Education: {{University}}</p>{{/University}}
+          {{^University}}<p class="userSchool"></p>{{/University}}
     </div>
   </body>
 </html>

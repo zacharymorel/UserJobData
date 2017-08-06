@@ -34,8 +34,13 @@ app.get('/', (request, response) => {
 })
 
 app.get('/:id/', (request, response) => {
+  const userId = parseInt(request.params.id)
   // let userId = +(request.params.id)-1
-  response.render('userpage')
+
+  database.one('SELECT * FROM "robottable" WHERE id = $(id)',{id:userId})
+    .then(id => {
+      response.render('userpage', id)
+    })
 })
 
 app.listen(3000, () => {
