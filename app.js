@@ -25,22 +25,31 @@ app.set('view engine', 'mustache')
 app.get('/', (request, response) => {
   database.any('SELECT * FROM "robottable"').then(rows => {
 
-    const templateData = {
-      id: rows.filter(row => row.id)
+    // const templateData = {
+    //   id: rows.filter(row => row.id)
       // WAT?
-    }
-    response.render('index', templateData)
+    // }
+    response.render('index', {id: rows})
   })
 })
 
-app.get('/:id/', (request, response) => {
+app.get('/robots/:id/', (request, response) => {
   const userId = parseInt(request.params.id)
-  // let userId = +(request.params.id)-1
 
-  database.one('SELECT * FROM "robottable" WHERE id = $(id)',{id:userId})
-    .then(id => {
-      response.render('userpage', id)
+  database.one('SELECT * FROM "robottable" WHERE id = $1',[userId])
+    .then(robot => {
+      response.render('userpage', robot)
     })
+    .catch(error => {
+      response.render('newuser')
+    })
+})
+
+app.post('/adduser/:id/', (request, reponse) => {
+  const addNewUser = request.body
+
+  
+  // need to put input in array
 })
 
 app.listen(3000, () => {
