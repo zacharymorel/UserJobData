@@ -10,7 +10,11 @@
     <ul>
       {{#id}}
       <li>
-        <img src={{ImageUrl}} alt="suppose to be an avatar.">
+        {{#ImageUrl}}
+          <img src={{ImageUrl}} alt="suppose to be an avatar.">
+        {{/ImageUrl}}
+        {{^ImageUrl}}
+        <img src="/Profile-placeholder-450x450.png" alt="Image of Robot suppose to go here.">{{/ImageUrl}}
         <a href="/robots/{{id}}/">{{UserName}}</a>
         {{#Job}}
           <p>{{Job}}, {{Company}}</p>

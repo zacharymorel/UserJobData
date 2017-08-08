@@ -6,7 +6,12 @@
   </head>
   <body>
     <div class="personalInfo">
-      <img src={{ImageUrl}} alt="Suppose to be a avatar">
+      {{#ImageUrl}}
+        <img src={{ImageUrl}} alt="suppose to be an avatar.">
+      {{/ImageUrl}}
+      {{^ImageUrl}}
+        <img src="/Profile-placeholder-450x450.png" alt="Image of Robot suppose to go here.">
+      {{/ImageUrl}}
       <h1>{{UserName}}</h1>
         {{#Address}}<p class="currentLinving">{{Address}} </p>{{/Address}}
         {{#Job}}<p class="career">{{Job}}, {{Company}}</p>{{/Job}}

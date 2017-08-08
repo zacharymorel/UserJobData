@@ -2,6 +2,7 @@ const express = require('express')
 const mustacheExpress = require('mustache-express')
 const bodyParser = require('body-parser')
 const pgPromise = require('pg-promise')()
+const expressValidator = require('express-validator')
 const app = express()
 
 const database = pgPromise({ database: 'robotDB' })
@@ -9,6 +10,7 @@ const database = pgPromise({ database: 'robotDB' })
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(expressValidator())
 
 app.use(express.static('public'))
 app.engine('mustache', mustacheExpress())
@@ -56,6 +58,15 @@ app.post('/adduser/:id/', (request, response) => {
   company: request.body.Company
   }
 
+// Check mark's form github for help on validators
+
+  request.checkBody("UserName", 'Please fill this input!').notEmpty()
+  request.checkBody("Email", 'Please fill this input!').notEmpty()
+  request.checkBody("University", 'Please fill this input!').notEmpty()
+  request.checkBody("Address", 'Please fill this input!').notEmpty()
+  request.checkBody("Job", 'Please fill this input!').notEmpty()
+  request.checkBody("Company", 'Please fill this input!').notEmpty()
+
   database.one(`INSERT INTO "robottable" ("UserName", "Email", "University", "Address", "Job", "Company")
       VALUES ($(userName), $(email), $(university), $(address), $(job), $(company)) RETURNING id`, newUser)
       .then(newUser => {
@@ -63,7 +74,6 @@ app.post('/adduser/:id/', (request, response) => {
       })
         // What do I put in to the object?
   // need to put input in array
-  // Cannot Post '/' is problem.
 })
 
 app.listen(3000, () => {

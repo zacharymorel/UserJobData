@@ -31,6 +31,10 @@ a {
   color: rgb(74, 132, 205);
 }
 
+img {
+  width: 60%;
+}
+
 .forHire {
   color: red;
 }
