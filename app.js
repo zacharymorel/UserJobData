@@ -46,10 +46,24 @@ app.get('/robots/:id/', (request, response) => {
 })
 
 app.post('/adduser/:id/', (request, reponse) => {
-  const addNewUser = request.body
 
-  
+  const newUser = {
+  userName: request.body.UserName,
+  email: request.body.Email,
+  university: request.body.University,
+  address: request.body.Address,
+  job: request.body.Job,
+  company: request.body.Company
+  }
+
+  database.one(`INSERT INTO "robottable" (UserName, Email, University, Address, Job, Company)
+      VALUES ($(userName), $(email), $(university), $(address), $(job), $(company)) RETURNING id`, newUser)
+      .then(newUser => {
+        response.redirect('/', newUser)
+      })
+        // What do I put in to the object?
   // need to put input in array
+  // Cannot Post '/' is problem.
 })
 
 app.listen(3000, () => {
