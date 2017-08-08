@@ -45,7 +45,7 @@ app.get('/robots/:id/', (request, response) => {
     })
 })
 
-app.post('/adduser/:id/', (request, reponse) => {
+app.post('/adduser/:id/', (request, response) => {
 
   const newUser = {
   userName: request.body.UserName,
@@ -56,7 +56,7 @@ app.post('/adduser/:id/', (request, reponse) => {
   company: request.body.Company
   }
 
-  database.one(`INSERT INTO "robottable" (UserName, Email, University, Address, Job, Company)
+  database.one(`INSERT INTO "robottable" ("UserName", "Email", "University", "Address", "Job", "Company")
       VALUES ($(userName), $(email), $(university), $(address), $(job), $(company)) RETURNING id`, newUser)
       .then(newUser => {
         response.redirect('/', newUser)
