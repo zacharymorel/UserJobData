@@ -8,7 +8,6 @@
     <h3>'Sorry, there is no user in our directory by that Id. Would you like to input the user?'</h3>
     <form class="" action="/adduser/:id/" method="post">
       <input type="text" name="UserName" placeholder="User Name">
-      <!-- <input type="text" name="ImageUrl" placeholder="Your Picture Here"> -->
       <input type="text" name="Email" placeholder="Email">
       <input type="text" name="University" placeholder="University">
       <input type="text" name="Address" placeholder="Address">
@@ -16,5 +15,8 @@
       <input type="text" name="Company" placeholder="Company">
       <button type="submit" name="button">Submit</button>
     </form>
+    {{#errors}}
+      {{msg}}
+    {{/errors}}
   </body>
 </html>

@@ -49,33 +49,46 @@ app.get('/robots/:id/', (request, response) => {
 
 app.post('/adduser/:id/', (request, response) => {
 
-  const newUser = {
-  userName: request.body.UserName,
-  email: request.body.Email,
-  university: request.body.University,
-  address: request.body.Address,
-  job: request.body.Job,
-  company: request.body.Company
-  }
+  request.checkBody("userName", 'Please fill this input!').notEmpty()
+  request.checkBody("email", 'Please fill this input!').notEmpty()
+  request.checkBody("university", 'Please fill this input!').notEmpty()
+  request.checkBody("address", 'Please fill this input!').notEmpty()
+  request.checkBody("job", 'Please fill this input!').notEmpty()
+  request.checkBody("company", 'Please fill this input!').notEmpty()
 
-// Check mark's form github for help on validators
+  var errors = request.validationErrors()
 
-  request.checkBody("UserName", 'Please fill this input!').notEmpty()
-  request.checkBody("Email", 'Please fill this input!').notEmpty()
-  request.checkBody("University", 'Please fill this input!').notEmpty()
-  request.checkBody("Address", 'Please fill this input!').notEmpty()
-  request.checkBody("Job", 'Please fill this input!').notEmpty()
-  request.checkBody("Company", 'Please fill this input!').notEmpty()
+  if (errors) {
+    response.render('newuser', {errors: errors})
+  } else {
+    const newUser = {
+    userName: request.body.UserName,
+    email: request.body.Email,
+    university: request.body.University,
+    address: request.body.Address,
+    job: request.body.Job,
+    company: request.body.Company
+    }
 
   database.one(`INSERT INTO "robottable" ("UserName", "Email", "University", "Address", "Job", "Company")
       VALUES ($(userName), $(email), $(university), $(address), $(job), $(company)) RETURNING id`, newUser)
       .then(newUser => {
-        response.redirect('/', newUser)
+        response.redirect('/')
       })
-        // What do I put in to the object?
-  // need to put input in array
+      .catch(error => {
+        console.log('something went wrong!');
+      })
+    }
+})
+
+app.get('/robotDelete/:id', (request, response) => {
+  const dinoId = parseInt(request.params.id)
+  database.result(`DELETE FROM "robottable" WHERE "id" = $(id)`, {id: dinoId})
+    .then(data => {
+      response.redirect('/')
+    })
 })
 
 app.listen(3000, () => {
-  console.log('My the Force be with you')
+  console.log('May the Force be with you')
 })
